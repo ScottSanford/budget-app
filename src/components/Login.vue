@@ -3,11 +3,11 @@
     <h1 class="heading-primary heading-primary--main">{{ heading }}</h1>
     <form class="form">
         <div class="form__group">
-            <input type="email" class="form__input" placeholder="Email" id="email" required>
+            <input type="email" class="form__input" placeholder="Email" id="email" v-model="loginForm.email" required>
             <label for="email" class="form__label">Email</label>
         </div>
         <div class="form__group">
-            <input type="password" class="form__input" placeholder="Password" id="password" required>
+            <input type="password" class="form__input" placeholder="Password" id="password" v-model="loginForm.password" required>
             <label for="password" class="form__label">Password</label>
         </div>
         <div class="form__group">
@@ -24,10 +24,20 @@ export default {
     props: {
 		heading: String
 	},
+	data() {
+		return {
+			loginForm: {
+				email: '',
+				password: ''
+			}
+		}
+	},
 	methods: {
 		showSignup() {
-			console.log(this)
 			this.$parent.showLogin = false
+		},
+		onLogin() {
+			console.log(this.loginForm)
 		}
 	}
 }
@@ -147,7 +157,7 @@ export default {
 .link {
 	color: $color-primary;
 	font-size: 1.6rem;
-	padding: 1.5rem 4rem;
+	padding: 0 1rem;
 	transition: all .3s;
 
 	&:hover {
@@ -160,21 +170,4 @@ export default {
 		color: $color-secondary;
 	}
 }
-
-.heading-primary {
-	color: $color-primary;
-	backface-visibility: hidden;
-	margin-bottom: 3rem;
-
-	&--main {
-		animation: moveInLeft 1s ease-out;
-		display: block;
-		font-family: 'Nunito Sans', sans-serif;
-		font-size: 4rem;
-		font-weight: 800;
-		letter-spacing: .4rem;
-	}
-}
 </style>
-
-

@@ -4,3 +4,18 @@ body {
     font-size: 16px;
     font-weight: 400;
 }
+
+.heading-primary {
+	color: $color-primary;
+	backface-visibility: hidden;
+	margin-bottom: 3rem;
+
+	&--main {
+		animation: moveInLeft 1s ease-out;
+		display: block;
+		font-family: 'Nunito Sans', sans-serif;
+		font-size: 4rem;
+		font-weight: 800;
+		letter-spacing: .4rem;
+	}
+}

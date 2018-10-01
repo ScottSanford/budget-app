@@ -7,7 +7,6 @@
 <script>
 // Vue Components
 import Home from './components/Home.vue'
-import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
 
 export default {
@@ -15,7 +14,6 @@ export default {
 	// Component Registration
 	components: {
 		Home,
-		Login,
 		Signup
 	}
 }

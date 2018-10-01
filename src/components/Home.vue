@@ -5,8 +5,8 @@
 			<img src="../assets/nickel-logo.png" class="logo">
 		</div>
 		<div>
-			<Login heading="Your freedom starts here."/>
-			<!-- <Signup heading="Signup for Nickel" /> -->
+			<Login heading="Your freedom starts here." v-if="showLogin"/>
+			<Signup heading="Signup for Nickel" v-else/>
 		</div>
 		<div></div>
 	</div>
@@ -16,12 +16,19 @@
 
 <script>
 import Login from '../components/Login.vue'
+import Signup from '../components/Signup.vue'
 
 export default {
     name: 'home',
     components: {
-        Login
-    }
+		Login,
+		Signup
+	},
+	data() {
+		return {
+			showLogin: true
+		}
+	}
 }
 </script>
 

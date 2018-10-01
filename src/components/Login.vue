@@ -12,7 +12,7 @@
         </div>
         <div class="form__group">
             <button class="btn btn--blue">Login</button>
-            <router-link class="link" to="/signup">Sign up</router-link>
+            <span class="link" @click="showSignup">Sign up</span>
         </div>
     </form>
 </div>
@@ -21,7 +21,15 @@
 <script>
 export default {
     name: 'login',
-    props: ['heading']
+    props: {
+		heading: String
+	},
+	methods: {
+		showSignup() {
+			console.log(this)
+			this.$parent.showLogin = false
+		}
+	}
 }
 </script>
 
@@ -29,110 +37,111 @@ export default {
 @import '../sass/abstracts/_variables';
 
 .form {
-  	&__group {
+	&__group {
 		&:not(:last-child) {
-			margin-bottom: 2rem;
+		margin-bottom: 2rem;
 		}
-  }
-
-  &__input {
-	background-color: $color-white;
-	border: none;
-	border-bottom: 3px solid transparent;
-	border-radius: .6rem;
-	box-shadow: 0 1rem 2rem rgba($color-black, .1);
-	color: inherit;
-	display: block;
-	font-family: inherit;
-	font-size: 1.5rem;
-	padding: 1.5rem 2rem;
-	outline: none;
-	transition: all .4s;
-	width: 75%;
-			
-	&:focus {
-		border-bottom: 3px solid $color-secondary;
 	}
 
-	&:focus:invalid {
-		border-bottom: 3px solid $color-primary;
+	&__input {
+		background-color: $color-white;
+		border: none;
+		border-bottom: 3px solid transparent;
+		border-radius: .6rem;
+		box-shadow: 0 1rem 2rem rgba($color-black, .1);
+		color: inherit;
+		display: block;
+		font-family: inherit;
+		font-size: 1.5rem;
+		padding: 1.5rem 2rem;
+		outline: none;
+		transition: all .4s;
+		width: 75%;
+
+		&:focus {
+			border-bottom: 3px solid $color-secondary;
+		}
+
+		&:focus:invalid {
+			border-bottom: 3px solid $color-primary;
+		}
+
+		&::-webkit-input-placeholder {
+			color: $color-primary;
+		}
 	}
 
-	&::-webkit-input-placeholder {
-		color: $color-primary;
+	&__label {
+		display: block;
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-left: 2rem;
+		margin-top: .7rem;
+		transition: all .3s;
 	}
-  }
 
-  &__label {
-	display: block;
-	font-size: 1.2rem;
-	font-weight: 700;
-	margin-left: 2rem;
-	margin-top: .7rem;
-	transition: all .3s;
-  }
-
-  &__input:placeholder-shown + &__label {
-	opacity: 0;
-	transform: translateY(-4rem);
-	visibility: hidden;
-  }
+	&__input:placeholder-shown + &__label {
+		opacity: 0;
+		transform: translateY(-4rem);
+		visibility: hidden;
+	}
 }
 
 .btn {
-    &,
-    &:link,
-    &:visited {
-        border-radius: .6rem;
-        display: inline-block;
-        font-size: 1.6rem;
-        padding: 1.5rem 4rem;
-        position: relative;
-        text-decoration: none;
-        transition: all .2s;
+	&,
+	&:link,
+	&:visited {
+		border-radius: .6rem;
+		display: inline-block;
+		font-size: 1.6rem;
+		padding: 1.5rem 4rem;
+		position: relative;
+		text-decoration: none;
+		transition: all .2s;
 
-        // Change for the <button> element
-        border: none;
-        cursor: pointer;
-    }
+		// Change for the <button> element
+		border: none;
+		cursor: pointer;
+	}
 
-    &:hover {
-        box-shadow: 0 .5rem 1rem rgba($color-black, .2);
-        transform: translateY(-1px);
-    }
+	&:hover {
+		box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+		transform: translateY(-1px);
+	}
 
-    &:active,
-    &:focus {
-        box-shadow: 0 .5rem 1rem rgba($color-black, .2);
-        outline: none;
-        transform: translateY(0px);
-    }
+	&:active,
+	&:focus {
+		box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+		outline: none;
+		transform: translateY(0px);
+	}
 
-    &--blue {
-        background-color: $color-primary;
-        color: $color-white;
-        &::after {
-            background-color: $color-primary;
-        }
-    }
+	&--blue {
+		background-color: $color-primary;
+		color: $color-white;
 
-    &::after {
-        border-radius: 10rem;
-        content: '';
-        display: inline-block;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        transition: all .4s;
-        width: 100%;
-        z-index: -1;
-    }
+		&::after {
+			background-color: $color-primary;
+		}
+	}
 
-    &--animated {
-        animation: moveInButton .5s ease-out .75s;
-        animation-fill-mode: backwards;
-    }
+	&::after {
+		border-radius: 10rem;
+		content: '';
+		display: inline-block;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		transition: all .4s;
+		width: 100%;
+		z-index: -1;
+	}
+
+	&--animated {
+		animation: moveInButton .5s ease-out .75s;
+		animation-fill-mode: backwards;
+	}
 }
 
 .link {
@@ -157,7 +166,7 @@ export default {
 	backface-visibility: hidden;
 	margin-bottom: 3rem;
 
-    &--main {
+	&--main {
 		animation: moveInLeft 1s ease-out;
 		display: block;
 		font-family: 'Nunito Sans', sans-serif;

@@ -4,30 +4,71 @@
         <form class="form">
             <div class="form__username">
                 <div class="form__group">
-                    <input type="text" class="form__input" placeholder="First name" id="firstName" required v-model="signupForm.firstName">
+                    <input
+						type="text"
+						class="form__input"
+						placeholder="First name"
+						id="firstName"
+						name="first name"
+						v-validate="'required'"
+						v-model="signupForm.firstName">
                     <label for="firstName" class="form__label">First name</label>
+					<span>{{ errors.first('first name') }}</span>
                 </div>
                 <div class="form__group">
-                    <input type="text" class="form__input" placeholder="Last Name" id="lastName" required v-model="signupForm.lastName">
+                    <input
+						type="text"
+						class="form__input"
+						placeholder="Last Name"
+						id="lastName"
+						name="last name"
+						v-validate="'required'"
+						v-model="signupForm.lastName">
                     <label for="lastName" class="form__label">Last name</label>
+					<span>{{ errors.first('last name') }}</span>
                 </div>
             </div>
             <div class="form__group">
-                <input type="email" class="form__input" placeholder="Email" id="email" required v-model="signupForm.email">
+                <input
+					type="email"
+					class="form__input"
+					placeholder="Email"
+					id="email"
+					name="email"
+					v-validate="'required|email'"
+					v-model="signupForm.email">
                 <label for="email" class="form__label">Email</label>
+				<span>{{ errors.first('email') }}</span>
             </div>
             <div class="form__passwords">
                 <div class="form__group">
-                    <input type="password" class="form__input" placeholder="Password" id="password" required v-model="signupForm.password">
+                    <input
+						type="password"
+						class="form__input"
+						placeholder="Password"
+						id="password"
+						name="password"
+						ref="password"
+						v-validate="'required'"
+						v-model="signupForm.password">
                     <label for="password" class="form__label">Password</label>
+					<span>{{ errors.first('password') }}</span>
                 </div>
                 <div class="form__group">
-                    <input type="password" class="form__input" placeholder="Confirm password" id="confirmPassword" required v-model="signupForm.confirmPassword">
+                    <input
+						type="password"
+						class="form__input"
+						placeholder="Confirm password"
+						id="confirmPassword"
+						name="confirm password"
+						v-validate="'required|confirmed:password'"
+						v-model="signupForm.confirmPassword">
                     <label for="confirmPassword" class="form__label">Confirm password</label>
+					<span>{{ errors.first('confirm password') }}</span>
                 </div>
             </div>
             <div class="form__group">
-                <button class="btn btn--blue" @click.prevent="onSignup()">Sign up</button>
+                <button class="btn btn--blue" @click.prevent="onSignup()" @keyup.enter="onLogin">Sign up</button>
                 <span class="u-margin-left-small">Already have an account?</span><a class="link" @click="showLogin">&nbsp;Sign In</a>
             </div>
         </form>

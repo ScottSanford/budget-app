@@ -1,19 +1,41 @@
 <template>
 <div>
     <h1 class="heading-primary heading-primary--main">{{ heading }}</h1>
-    <form class="form">
+    <form class="form" @submit="onLogin" action="#">
         <div class="form__group">
-            <input type="email" class="form__input" placeholder="Email" id="email" v-model="loginForm.email" required>
+            <input 
+				type="email"
+				class="form__input"
+				placeholder="Email"
+				id="email"
+				name="email"
+				v-model="loginForm.email"
+				v-validate="'required|email'">
             <label for="email" class="form__label">Email</label>
+			<span>{{ errors.first('email') }}</span>
         </div>
         <div class="form__group">
-            <input type="password" class="form__input" placeholder="Password" id="password" v-model="loginForm.password" required>
+            <input
+			type="password"
+			class="form__input"
+			placeholder="Password"
+			id="password"
+			name="password"
+			v-validate="'required'"
+			v-model="loginForm.password">
             <label for="password" class="form__label">Password</label>
+			<span>{{ errors.first('password') }}</span>
         </div>
         <div class="form__group">
             <button class="btn btn--blue">Login</button>
             <span class="link" @click="showSignup">Sign up</span>
         </div>
+		<p v-if="formErrors.length">
+			<b>Please correct the following error(s):</b>
+			<ul>
+			<li v-for="error in formErrors" :key="error">{{ error }}</li>
+			</ul>
+		</p>
     </form>
 </div>
 </template>
@@ -26,6 +48,7 @@ export default {
 	},
 	data() {
 		return {
+			formErrors: [],
 			loginForm: {
 				email: '',
 				password: ''
@@ -37,7 +60,18 @@ export default {
 			this.$parent.showLogin = false
 		},
 		onLogin() {
-			console.log(this.loginForm)
+			if (this.loginForm.email && this.login.password) {
+				console.log(this.loginForm)
+			}
+
+			this.formErrors = []
+
+			if (!this.loginForm.email) {
+				this.formErrors.push('Email required.')
+			}
+			if (!this.loginForm.password) {
+				this.formErrors.push('Password required.')
+			}
 		}
 	}
 }
